@@ -1,0 +1,121 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+
+<div class="content-section">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">{{ legend }}</legend>
+            <div class="form-group">
+                {{ form.automatic_thought.label(class="form-control-label") }}
+                {% if form.automatic_thought.errors %}
+                {{ form.automatic_thought(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.automatic_thought.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.automatic_thought(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.rational_response.label(class="form-control-label") }}
+                {% if form.rational_response.errors %}
+                {{ form.rational_response(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.rational_response.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.rational_response(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.cognitive_distortions.label(class="form-control-label") }}
+                {{ form.cognitive_distortions}}
+                <a class="badge badge-info" href="{{ url_for('thoughts.cognitive_distortions_info')}}">Info</a>
+            </div>
+        </fieldset>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+    </form>
+</div>
+
+
+
+
+<!-- <h1 class="mb-3"> {{ user.name }} here is your thought record. ({{ thoughts.total }})</h1> -->
+{% for thought in thoughts.items %}
+<article class="media content-section">
+    <div class="media-body">
+        <div class="article-metadata">
+            <a class="text-muted"
+                href="{{ url_for('thoughts.thought', thought_id=thought.id) }}">{{ thought.date_posted.strftime('%Y-%m-%d') }}</a>
+        </div>
+        <h4><a class="article-title"
+                href="{{ url_for('thoughts.thought', thought_id=thought.id) }}">{{ thought.automatic_thought }}</a>
+        </h4>
+        <p class="article-content">{{ thought.rational_response }}</p>
+        {% if thought.all_or_nothing_thinking == True %}
+        <span class="badge badge-primary">All or Nothing Thinking</span>
+        {% endif %}
+        {% if thought.overgeneralisation == True %}
+        <span class="badge badge-secondary">Overgeneralisation</span>
+        {% endif %}
+        {% if thought.mental_filter == True %}
+        <span class="badge badge-success">Mental Filter</span>
+        {% endif %}
+        {% if thought.disqualifying_the_positive == True %}
+        <span class="badge badge-danger">Disqualifying the Positive</span>
+        {% endif %}
+        {% if thought.jumping_to_conclusions == True %}
+        <span class="badge badge-warning">Jumping to Conclusions</span>
+        {% endif %}
+        {% if thought.magnification_or_minimization == True %}
+        <span class="badge badge-info">Magnification or Minimization</span>
+        {% endif %}
+        {% if thought.emotional_reasoning == True %}
+        <span class="badge badge-dark">Emotional Reasoning</span>
+        {% endif %}
+        {% if thought.should_statements == True %}
+        <span class="badge badge-light">Should Statements</span>
+        {% endif %}
+        {% if thought.labelling_mislabeling == True %}
+        <span class="badge badge-primary">Labelling Mislabeling</span>
+        {% endif %}
+        {% if thought.personalization == True %}
+        <span class="badge badge-secondary">Personalization</span>
+        {% endif %}
+        <span class="badge badge-primary">Anger <span class="badge badge-light">{{ thought.anger }}</span></span>
+        <span class="badge badge-primary">Disgust <span class="badge badge-light">{{ thought.disgust }}</span></span>
+        <span class="badge badge-primary">Fear <span class="badge badge-light">{{ thought.fear }}</span></span>
+        <span class="badge badge-primary">Guilt <span class="badge badge-light">{{ thought.guilt }}</span></span>
+        <span class="badge badge-primary">Joy <span class="badge badge-light">{{ thought.joy }}</span></span>
+        <span class="badge badge-primary">Sad <span class="badge badge-light">{{ thought.sadness }}</span></span>
+        <span class="badge badge-primary">Shame <span class="badge badge-light">{{ thought.shame }}</span></span>
+
+    </div>
+</article>
+{% endfor %}
+
+{% for page_num in thoughts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+{% if page_num %}
+{% if thoughts.page == page_num %}
+<a class="btn btn-info mb-4"
+    href="{{ url_for('users.user_thoughts', name=user.name, page=page_num) }}">{{ page_num }}</a>
+{% else %}
+<a class="btn btn-outline-info mb-4"
+    href="{{ url_for('users.user_thoughts', name=user.name, page=page_num) }}">{{ page_num }}</a>
+{% endif %}
+{% else %}
+...
+{% endif %}
+{% endfor %}
+
+
+{% endblock content %}

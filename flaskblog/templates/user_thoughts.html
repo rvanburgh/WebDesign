@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1 class="mb-3"> {{ user.name }} here is your thought record. ({{ thoughts.total }})</h1>
+{% for thought in thoughts.items %}
+<article class="media content-section">
+  <div class="media-body">
+    <div class="article-metadata">
+      <small class="text-muted">{{ thought.date_posted.strftime('%Y-%m-%d') }}</small>
+    </div>
+    <h2><a class="article-title"
+        href="{{ url_for('thoughts.thought', thought_id=thought.id) }}">{{ thought.automatic_thought }}</a>
+    </h2>
+    <p class="article-content">{{ thought.rational_response }}</p>
+  </div>
+</article>
+{% endfor %}
+{% for page_num in thoughts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+{% if page_num %}
+{% if thoughts.page == page_num %}
+<a class="btn btn-info mb-4"
+  href="{{ url_for('users.user_thoughts', name=user.name, page=page_num) }}">{{ page_num }}</a>
+{% else %}
+<a class="btn btn-outline-info mb-4"
+  href="{{ url_for('users.user_thoughts', name=user.name, page=page_num) }}">{{ page_num }}</a>
+{% endif %}
+{% else %}
+...
+{% endif %}
+{% endfor %}
+{% endblock content %}

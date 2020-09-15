@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block content %}
+
+<h2>Dysfunctional Attitude Test</h2>
+<p>
+    Because of the crucial importance of eliciting the silent assumptions that give rise to your mood swings, a method
+    called the "Dysfunctional Attitude Scale" (DAS) has been developed by Dr. Arlene
+    Weissman. She has compiled a list of one hundred self-defeating attitudes that commonly occur
+    in individuals predisposed to emotional disorders. Her research has indicated that while negative automatic thoughts
+    are reduced dramatically between episodes of depression, a self-defeating belief system remains more or less
+    constant during episodes of depression and remission. Dr. Weissman's studies confirm the concept that your silent
+    assumptions represent a predisposition to emotional turbulence that you carry with you at all times.
+</p>
+<a href="{{ url_for('dysfunctional_attitude_scale.history') }}"> View your history.</a>
+
+<br>
+<h4>
+    Instructions: Put a check (✔) on the answer that represents your estimate of how you think most of the time. Because
+    we are all different, there is no "right" or "wrong" answer to any statement. To decide whether a given attitude is
+    typical of your own philosophy, recall how you look at things most of the time.
+</h4>
+
+{{ wtf.quick_form(form) }}
+
+{% endblock content %}

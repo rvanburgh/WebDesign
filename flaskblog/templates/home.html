@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+{% block content %}
+
+{% if thoughts.items != [] %}
+<p class="mr-2">Hello
+  {{ name }}, here is your thought record.</pf>
+  {% else %}
+<p class="mr-2">Hello
+  {{ name }}, your thought record is empty.</pf>
+<h3><a class="article-title" href="{{ url_for('thoughts.new_thought') }}">Log your first thought.</a>
+</h3>
+{% endif %}
+
+<!-- Prints counts for cognitive distortions -->
+{% for key, value in cognitive_distortions_count.items() %}
+<h6>
+  {{key}} : {{value}}
+</h6>
+{% endfor %}
+<br>
+
+<!-- Prints sum for moods -->
+{% for key, value in mood_sum.items() %}
+<h6>
+  {{key}} : {{value}}
+</h6>
+{% endfor %}
+
+{% for thought in thoughts.items %}
+<article class="media content-section">
+  <div class="media-body">
+    <div class="article-metadata">
+      <small class="text-muted">{{ thought.date_posted.strftime('%Y-%m-%d') }}</small>
+    </div>
+    <h4><a class="article-title"
+        href="{{ url_for('thoughts.thought', thought_id=thought.id) }}">{{ thought.automatic_thought }}</a>
+    </h4>
+    <p class="article-content">{{ thought.rational_response }}</p>
+    {% if thought.all_or_nothing_thinking == True %}
+    <span class="badge badge-primary">All or Nothing Thinking</span>
+    {% endif %}
+    {% if thought.overgeneralisation == True %}
+    <span class="badge badge-secondary">Overgeneralisation</span>
+    {% endif %}
+    {% if thought.mental_filter == True %}
+    <span class="badge badge-success">Mental Filter</span>
+    {% endif %}
+    {% if thought.disqualifying_the_positive == True %}
+    <span class="badge badge-danger">Disqualifying the Positive</span>
+    {% endif %}
+    {% if thought.jumping_to_conclusions == True %}
+    <span class="badge badge-warning">Jumping to Conclusions</span>
+    {% endif %}
+    {% if thought.magnification_or_minimization == True %}
+    <span class="badge badge-info">Magnification or Minimization</span>
+    {% endif %}
+    {% if thought.emotional_reasoning == True %}
+    <span class="badge badge-dark">Emotional Reasoning</span>
+    {% endif %}
+    {% if thought.should_statements == True %}
+    <span class="badge badge-light">Should Statements</span>
+    {% endif %}
+    {% if thought.labelling_mislabeling == True %}
+    <span class="badge badge-primary">Labelling Mislabeling</span>
+    {% endif %}
+    {% if thought.personalization == True %}
+    <span class="badge badge-secondary">Personalization</span>
+    {% endif %}
+  </div>
+</article>
+{% endfor %}
+{% for page_num in thoughts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+{% if page_num %}
+{% if thoughts.page == page_num %}
+<a class="btn btn-info mb-4" href="{{ url_for('main.home', page=page_num) }}">{{ page_num }}</a>
+{% else %}
+<a class="btn btn-outline-info mb-4" href="{{ url_for('main.home', page=page_num) }}">{{ page_num }}</a>
+{% endif %}
+{% else %}
+...
+{% endif %}
+{% endfor %}
+{% endblock content %}

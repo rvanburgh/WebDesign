@@ -1,0 +1,212 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h3>
+    GDPR
+</h3>
+
+<div class="container">
+    <form action="/delete_all/" method="post">
+        <button name="delete_all" type="submit" class="btn btn-danger">Delete all data</button>
+    </form>
+</div>
+
+
+<div class="container">
+    <h2>View your data</h2>
+    <a href="#thoughts" class="btn btn-info" data-toggle="collapse">View thought log data</a>
+    <div id="thoughts" class="collapse">
+        <p></p>
+        <table class="table-responsive">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>automatic_thought</th>
+                    <th>rational_response</th>
+                    <th>all_or_nothing_thinking</th>
+                    <th>overgeneralisation</th>
+                    <th>mental_filter</th>
+                    <th>disqualifying_the_positive</th>
+                    <th>jumping_to_conclusions</th>
+                    <th>magnification_or_minimization</th>
+                    <th>emotional_reasoning</th>
+                    <th>should_statements</th>
+                    <th>labelling_mislabeling</th>
+                    <th>personalization</th>
+                    <th>anger</th>
+                    <th>disgust</th>
+                    <th>fear</th>
+                    <th>guilt</th>
+                    <th>joy</th>
+                    <th>sadness</th>
+                    <th>shame</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in thoughts_data %}
+                <tr>
+                    <td>{{result.date_posted.strftime('%Y-%m-%d')}}</td>
+                    <td>{{result.automatic_thought}}</td>
+                    <td>{{result.rational_response}}</td>
+                    <td>{{result.all_or_nothing_thinking}}</td>
+                    <td>{{result.overgeneralisation}}</td>
+                    <td>{{result.mental_filter}}</td>
+                    <td>{{result.disqualifying_the_positive}}</td>
+                    <td>{{result.jumping_to_conclusions}}</td>
+                    <td>{{result.magnification_or_minimization}}</td>
+                    <td>{{result.emotional_reasoning}}</td>
+                    <td>{{result.should_statements}}</td>
+                    <td>{{result.labelling_mislabeling}}</td>
+                    <td>{{result.personalization}}</td>
+                    <td>{{result.anger}}</td>
+                    <td>{{result.disgust}}</td>
+                    <td>{{result.fear}}</td>
+                    <td>{{result.guilt}}</td>
+                    <td>{{result.joy}}</td>
+                    <td>{{result.sadness}}</td>
+                    <td>{{result.shame}}</td>
+                </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+
+    <a href="#burns_data" class="btn btn-info" data-toggle="collapse">View depression test data</a>
+    <div id="burns_data" class="collapse">
+        <p></p>
+        <table class="table-responsive">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Score</th>
+                    <th>Level of depression</th>
+                    <th>Feeling sad or down in the dumps</th>
+                    <th>Feeling unhappy or blue</th>
+                    <th>Crying spells or tearfulness</th>
+                    <th>Feeling discouraged</th>
+                    <th>Feeling hopeless</th>
+                    <th>Low self-esteem</th>
+                    <th>Feeling worthless or inadequate</th>
+                    <th>Guilt or shame</th>
+                    <th>Criticising yourself or blaming yourself</th>
+                    <th>Difficulty making decisions</th>
+                    <th>Loss of interest in family, friends</th>
+                    <th>Loneliness</th>
+                    <th>Spending less time with family and friends</th>
+                    <th>Loss of motivation</th>
+                    <th>Loss of interest in work or other activities</th>
+                    <th>Avoiding work or other activities</th>
+                    <th>Loss of pleasure or satisfaction in life</th>
+                    <th>Feeling tired</th>
+                    <th>Difficulty sleeping or sleeping too much</th>
+                    <th>Decreased or increased appetite</th>
+                    <th>Loss of interest in sex</th>
+                    <th>Worrying about your health</th>
+                    <th>Do you have any suicidal thoughts?</th>
+                    <th>Would you like to end your life?</th>
+                    <th>Do you have a plan for harming yourself?</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in burns_data %}
+                <tr>
+                    <td>{{result.date_created.strftime('%Y-%m-%d')}}</td>
+                    <td>{{result.score}}</td>
+                    <td>{{result.level_of_depression}}</td>
+                    <td>{result.question_0}</td>
+                    <td>{result.question_1}</td>
+                    <td>{result.question_2}</td>
+                    <td>{result.question_3}</td>
+                    <td>{result.question_4}</td>
+                    <td>{result.question_5}</td>
+                    <td>{result.question_6}</td>
+                    <td>{result.question_7}</td>
+                    <td>{result.question_8}</td>
+                    <td>{result.question_9}</td>
+                    <td>{result.question_10}</td>
+                    <td>{result.question_11}</td>
+                    <td>{result.question_12}</td>
+                    <td>{result.question_13}</td>
+                    <td>{result.question_14}</td>
+                    <td>{result.question_15}</td>
+                    <td>{result.question_16}</td>
+                    <td>{result.question_17}</td>
+                    <td>{result.question_18}</td>
+                    <td>{result.question_19}</td>
+                    <td>{result.question_20}</td>
+                    <td>{result.question_21}</td>
+                    <td>{result.question_22}</td>
+                    <td>{result.question_23}</td>
+                    <td>{result.question_24}</td>
+                </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+
+    <a href="#dysfunctional_data" class="btn btn-info" data-toggle="collapse">View dysfunctional attitude data</a>
+    <div id="dysfunctional_data" class="collapse">
+        <p></p>
+        <table class="table-responsive">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Approval</th>
+                    <th>Love</th>
+                    <th>Achievement</th>
+                    <th>Perfectionism</th>
+                    <th>Entitlement</th>
+                    <th>Omnipotence</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in dysfunctional_attitude_data %}
+                <tr>
+                    <td>{{result.date_created.strftime('%Y-%m-%d')}}</td>
+                    <td>{{result.approval_score}}</td>
+                    <td>{{result.love_score}}</td>
+                    <td>{{result.achievement_score}}</td>
+                    <td>{{result.perfectionism_score}}</td>
+                    <td>{{result.entitlement_score}}</td>
+                    <td>{{result.omnipotence_score}}</td>
+                    <td>{{result.autonomy_score}}</td>
+                </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+
+    <a href="#gratitude_data" class="btn btn-info" data-toggle="collapse">View gratitude journal data</a>
+    <div id="gratitude_data" class="collapse">
+        <p></p>
+        <table class="table-responsive">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>First gratitude</th>
+                    <th>Second gratitude</th>
+                    <th>Third gratitude</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in gratitude_data %}
+                <tr>
+                    <td>{{result.date_posted.strftime('%Y-%m-%d')}}</td>
+                    <td>{{result.first_gratitude}}</td>
+                    <td>{{result.second_gratitude}}</td>
+                    <td>{{result.third_gratitude}}</td>
+                </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+
+</div>
+
+
+<!-- View -->
+
+<!-- Update -->
+
+<!--  -->
+{% endblock content %}

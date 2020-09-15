@@ -1,0 +1,96 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h1>Burns Depression Test Results</h1>
+<p>Your score is: {{score}}/100.</p>
+<p>Your classification is: {{level_of_depression}}.</p>
+
+
+{% if suicidal_concern == True %}
+<div>
+    <h3>Your scores were elevated on questions 23, 24 and 25, these questions asked you about your suicidal feelings,
+        urges and plans. We strongly suggest you obtain professional help immediately. </h3>
+
+    <h4>
+        The Samaritans Suicide Prevention Number: 116 123
+    </h4>
+    <h4>
+        Mind Line: 0300 123 3393
+    </h4>
+</div>
+<br>
+{% endif %}
+
+{% if level_of_depression == "no depression" %}
+<div>
+    Your score is between 0 and 5, you are probably feeling good already. This is in the range of normal, and most
+    people with scores this low feel pretty happily contented.
+</div>
+<br>
+
+{% elif level_of_depression == "normal but unhappy" %}
+<div>
+    Your score was between 6 and 10, it is still in the range of normal, but you are probably feeling a bit on the
+    "lumpy" side. There's room for improvement, a little mental "tuneup," if you will. The cognitive therapy techniques
+    in this book can often be remarkably helpful in these instances. Problems in daily living bug all of us, and a
+    change of perspective can often make a big difference in how you feel.
+
+</div>
+<br>
+
+{% elif level_of_depression == "mild depression" %}
+<div>Your score was between 11 and 25, your depression, at least at this time, is mild and should not be a cause for
+    alarm. You will definitely want to correct this problem, and you may be able to make substantial progress on your
+    own. Systematic self-help efforts along the lines proposed in this book, combined with frank communication on a
+    number of occasions with a trusted friend, may help a great deal. But if your score remains in this range for more
+    than a few weeks, you should consider professional treatment. The help of a therapist or an antidepressant
+    medication may considerably speed your recovery.
+
+    Some of the thorniest depressions I have treated were actually individuals whose scores were in the mild range.
+    Often these individuals had been mildly depressed for years, sometimes for most of their entire life. A mild chronic
+    depression that goes on and on is now called "dysthymic disorder." Although that is a big, fancy-sounding term, it
+    has a simple meaning. All it means is, "this person is awfully gloomy and negative most of the time." You probably
+    know someone who is like that, and you may have fallen into spells of pessimism yourself. Fortunately, the same
+    methods in this book that have proven so helpful for severe depressions can also be very helpful for these mild,
+    chronic depressions.
+</div>
+<br>
+
+{% elif level_of_depression == "moderate depression" %}
+<div>You scored between 26 and 50 on the BDC, it means you are moderately depressed. But don't be fooled by the term,
+    "moderate." A score in this range can indicate pretty intense suffering. Most of us can feel quite upset for brief
+    periods, but we usually snap out of it. If your score remains in this range for more than two weeks, you should
+    definitely seek professional treatment.
+</div>
+<br>
+
+{% elif level_of_depression == "severe depression" or level_of_depression == "extreme depression" %}
+<div> Your score was above 50, it indicates your depression is severe or even extreme. This degree of suffering can
+    be almost unbearable, especially when the score is increased above 75. Your moods are apt to be intensely
+    uncomfortable and possibly dangerous because the feelings of despair and hopelessness may even trigger suicidal
+    impulses. Fortunately, the prognosis for successful treatment is excellent. In fact, sometimes the most severe
+    depressions respond the most rapidly. But it is not wise to try to treat a severe depression on your own. A
+    professional consultation is a must. Seek out a trusted and competent counselor. Even if you receive psychotherapy
+    or antidepressant medications, I am convinced you can still benefit greatly by applying what I teach you. My
+    research studies have indicated that the spirit of self-help greatly speeds up recovery, even when patients receive
+    professional treatment.
+</div>
+<br>
+{% endif %}
+
+{% if health_concern == True %}
+<div>
+    Have you experienced any unexplained aches, pains, fever, weight loss, or other possible symptoms of medical
+    illness? We noticed your score for question 22, relating to health concerns was raised.
+    If so, it would be worthwhile to have a medical consultation, which would include a history, a complete
+    physical examination, and laboratory tests. Your doctor will probably give you a clean bill of health. This will
+    suggest that your uncomfortable physical symptoms are related to your emotional state. Depression can mimic a great
+    number of medical disorders because your mood swings often create a wide variety of puzzling physical symptoms.
+    These include, to name just a few, constipation, diarrhea, pain, insomnia or the tendency to sleep too much,
+    fatigue, loss of sexual interest, light-headedness, trembling, and numbness. As your depression improves, these
+    symptoms will in all likelihood vanish. However, keep in mind that many treatable illnesses may initially masquerade
+    as depression, and a medical examination could reveal an early (and lifesaving) diagnosis of a reversible organic
+    disorder.
+</div>
+{% endif %}
+{% endblock content %}
